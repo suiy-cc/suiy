@@ -1,0 +1,17 @@
+{
+    "fastBootApps": [
+        {
+            "AMPID": "0x1001",
+            "itemID": "com.hs7.home.scr1",
+            "path": "",
+            "label": "",
+            "bigIcon": "",
+            "smallIcon": "",
+            "systemdFile": "com.hs7.home@.service",
+            "itemType": "SYSTEMAPP",
+            "isAutoStart": true,
+            "isThereLoadingScreen": false,
+            "target": ""
+        }
+    ]
+}

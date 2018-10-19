@@ -1,0 +1,903 @@
+/* Copyright (C) 2016
+ * This Source Code Form is subject to the terms of the Hs7 Public */
+
+/* ********************************************************************* */
+package org.neusoft
+
+interface AppMgr
+{
+	version
+	{
+	    major 0
+	    minor 1
+	}
+/* ********************************************************************* */
+
+<** @description : 1st ask AMGR to start an APP **>
+	method StartAppReq fireAndForget {
+		in {
+			String itemID
+			String action
+			String data
+			Boolean isQuiet
+		}
+	}
+
+<** @description : move requester to bottom layer **>
+	method Move2BottomLayerReq{
+	    in{
+	        UInt32 requester
+	    }
+	}
+
+<** @description : move requester to its original layer **>
+	method Return2HomeLayerReq{
+	    in{
+	        UInt32 requester
+	    }
+	}
+
+<** @description : 2nd ask AMGR to stop an APP **>
+	method StopAppReq fireAndForget {
+		in {
+			UInt32 ampid
+		}
+	}
+
+<** @description : 3th ask AMGR to hide an APP **>
+	method HideAppReq fireAndForget {
+		in {
+			UInt32 ampid
+		}
+	}
+
+<** @description : done stopping APP, kill it. **>
+	method KillAppReq fireAndForget {
+		in {
+			UInt32 ampid
+		}
+	}
+
+<** @description : 32-bit unsigned integer array **>
+	array U32Array of UInt32
+
+<** @description : 64-bit unsigned integer array **>
+	array U64Array of UInt64
+
+<** @description : std::string array **>
+	array StringArray of String
+
+<** @description : general notify **>
+	broadcast GeneralNotify{
+		out {
+			UInt32 func
+            U64Array i32Args
+            StringArray stringArgs
+		}
+	}
+
+<** @description : properties of app's package **>
+    struct AppProperties{
+    UInt32 ampid
+    String AppName
+    String ItemID
+    String BigIconPath
+    String SmallIconPath
+    String AppType
+    }
+
+    <** @description : AppProperties array **>
+    array AppPropertiesArray of AppProperties
+
+<** @description : respond to InitializeNotify() **>
+	method InitializeReq fireAndForget {
+	    in{
+	        UInt32 ampid
+	        UInt64 id
+	    }
+	}
+
+<** @description : respond to ResumeNotify() **>
+	method ResumeReq fireAndForget {
+	    in{
+	        UInt32 ampid
+	        UInt64 id
+	    }
+	}
+
+<** @description : respond to PreShowNotify() **>
+	method PreShowReq fireAndForget {
+	    in{
+	        UInt32 ampid
+	        UInt64 id
+	    }
+	}
+
+<** @description : respond to PreHideNotify() **>
+	method PreHideReq fireAndForget {
+	    in{
+	        UInt32 ampid
+	        UInt64 id
+	    }
+	}
+
+
+
+<** @description : get all installed apps **>
+	method GetInstalledAppReq{
+	    in{
+	        UInt32 requester
+	    }
+		out {
+            U32Array apps
+		}
+	}
+
+<** @description : get all installed apps info **>
+    method GetInstalledAppInfoReq{
+        in{
+            UInt32 requester
+        }
+        out {
+            AppPropertiesArray appinfos
+        }
+    }
+
+<** @description : get specified ItemID's AMPID **>
+    method GetAMPIDReq{
+           in{
+           String itemID
+             }
+           out{
+           UInt32 ampid
+              }
+    }
+
+<** @description : start specified home **>
+    method StartHomeReq fireAndForget{
+           in{
+           UInt32 seat
+             }
+    }
+
+<** @description : send specified app's  boot-time log to AMGR **>
+    method SendBootLogReq fireAndForget{
+           in{
+           UInt32 ampid
+           StringArray bootLog
+             }
+    }
+
+<** @description : get specified App's logID **>
+    method GetLogIDReq{
+           in{
+           UInt32 ampid
+             }
+           out{
+           String logID
+              }
+    }
+
+<** @description : get list of active Apps **>
+    method GetActiveAppListReq{
+           out{
+           U32Array appList
+              }
+    }
+
+<** @description : get list of active Apps **>
+    method GetAppStateReq{
+           in{
+           UInt32 ampid
+             }
+           out{
+           UInt32 appstate
+              }
+    }
+
+<** @description : get app's properites **>
+    method GetAppPropertiesReq{
+           in{
+           UInt32 app
+             }
+           out{
+           AppProperties properties
+              }
+    }
+
+<** @description : ask for startup animation **>
+	method PlayStartupAnimationReq fireAndForget {
+		in {
+			UInt32 ampid
+		}
+	}
+
+<** @description : ask for no more startup animation **>
+	method StopStartupAnimationReq fireAndForget {
+		in {
+			UInt32 ampid
+		}
+	}
+
+<** @description : request app to call "StopStartupAnimationReq()" **>
+	method StopAnimationReq fireAndForget {
+		in {
+			UInt32 ampid
+		}
+	}
+
+<** @description : respond to StopStartupAnimationNotify() **>
+	method StopSuccessReq fireAndForget{
+	    in{
+	    UInt32 ampid
+	    UInt64 id
+	    }
+	}
+
+<** @description : get if specified app shows startup-screen **>
+	method GetStartupScreenAvailibilityReq{
+	    in{
+	    UInt32 ampid
+	    }
+	    out{
+	    Boolean isShowStartupScreen
+	    }
+	}
+
+<** @description : light up specified screen **>
+	method LightUpScreenReq fireAndForget{
+	    in{
+	    UInt32 seat
+	    }
+	}
+
+<** @description : respond to ShutdownNotify() **>
+	method ShutdownReq fireAndForget{
+	    in{
+	    UInt32 ampid
+	    }
+	}
+
+<** @description : request an EarlyInitializeNotify **>
+	method EarlyInitializeReq fireAndForget{
+	    in{
+	    UInt32 ampid
+	    }
+	}
+
+<** @description : get surface id of current app **>
+	method GetSurfaceIDReq{
+	    in{
+	    UInt32 ampid
+	    }
+        out {
+        UInt32 surfaceID
+		}
+	}
+
+<** @description : get under-layer's surface id of current app **>
+	method GetUnderLayerSurfaceIDReq{
+	    in{
+	    UInt32 ampid
+	    }
+        out {
+        UInt32 surfaceID
+		}
+	}
+
+<** @description : get background-layer's surface id of current app **>
+	method GetBKGLayerSurfaceIDReq{
+	    in{
+	    UInt32 ampid
+	    }
+        out {
+        UInt32 surfaceID
+		}
+	}
+
+<** @description : get anonymous AMPID **>
+	method GetAnonymousAMPIDReq{
+        out {
+        UInt32 apps
+		}
+	}
+
+<** @description : force app manager act that as main surface is configured **>
+	method ForceMainSurfaceConfiguredReq fireAndForget{
+        in {
+        UInt32 app
+		}
+	}
+
+<** @description : enable/disable specified app's touch operation **>
+	method EnableTouchAppReq fireAndForget{
+        in {
+        UInt32 app
+        Boolean enable
+		}
+	}
+
+<** @description : enable/disable specified screen's child safety lock **>
+	method EnableChildSafetyLockReq fireAndForget{
+        in {
+        UInt32 seat
+        Boolean enable
+        String pngPath
+		}
+	}
+
+<** @description : enable/disable specified screen's touch operation **>
+	method EnableTouchScreenReq fireAndForget{
+        in {
+        UInt32 seat
+        Boolean enable
+        String pngPath
+		}
+	}
+
+<** @description : set app's under-layer center or not **>
+	method SetUnderLayerCenterReq fireAndForget{
+        in {
+        UInt32 ampid
+        Boolean isCenter
+		}
+	}
+
+<** @description : get if app's under-layer is center or not **>
+	method IsUnderLayerCenterReq{
+        in {
+        UInt32 ampid
+		}
+		out{
+        Boolean isCenter
+		}
+	}
+
+<** @description : get screens' status **>
+	method GetScreensReq{
+		out{
+        U32Array screens
+		}
+	}
+
+<** @description : get screen's size **>
+	method GetScreenSizeReq{
+	    in {
+	    UInt32 seat
+	    }
+		out{
+        UInt32 width
+        UInt32 height
+		}
+	}
+
+<** @description : remove specified app from z-order list **>
+	method RemoveAppFromZOrderReq fireAndForget{
+		in{
+        UInt32 ampid
+		}
+	}
+
+<** @description : add extra surface and its belonging layer of app **>
+	method AddExtraSurfaceReq{
+		in{
+        UInt32 surface
+        UInt32 layer
+		}
+	}
+
+/* ****************************titlebar APIs begin********************* */
+<** @description : notify AMGR that specified titlebar is drop-down **>
+	method MarkTitlebarDropDownStateReq fireAndForget{
+        in {
+        UInt32 titlebar
+        Boolean isDropDown
+		}
+	}
+
+/* ****************************titlebar APIs end************************ */
+
+
+<** @description : get power state when appSDK init **>
+	method GetPowerStateWhenSDKInitReq{
+	    in{
+	        UInt32 seat
+	    }
+		out {
+            UInt32 powerState
+		}
+	}
+
+<** @description : get power state when appSDK init **>
+	method GetAllPowerStateWhenSDKInitReq{
+		out {
+            UInt32 iviPowerSta
+            UInt32 lRsePowerSta
+            UInt32 rRsePowerSta
+		}
+	}
+
+<** @description : request to set power awake state. **>
+	method PowerAwakeReq fireAndForget {
+		in {
+			UInt32 ampid
+            Boolean isPowerAwake
+		}
+	}
+
+<** @description : request to set screen awake state. **>
+	method ScreenAwakeReq fireAndForget {
+		in {
+			UInt32 ampid
+            Boolean isScreenAwake
+		}
+	}
+
+<** @description : request to set abnormal awake state. **>
+	method AbnormalAwakeReq fireAndForget {
+		in {
+			UInt32 ampid
+            Boolean isAbnormalAwake
+		}
+	}
+
+<** @description : request to set screen awake state. **>
+	method SendPowerSignalReq fireAndForget {
+		in {
+			UInt32 powerSignal
+		}
+	}
+
+<** @description : Intent information **>
+struct IntentInfo{
+    String itemID
+    String action
+    String data
+    Boolean isQuiet
+}
+
+<** @description : IntentInfo array **>
+	array IntentInfoArray of IntentInfo
+
+<** @description : get raw last source **>
+	method GetRawLastSourceReq{
+		out {
+            IntentInfoArray lastSourceSet
+		}
+	}
+
+<** @description : get last source **>
+	method GetLastSourceReq{
+		out {
+            IntentInfoArray lastSourceSet
+		}
+	}
+
+<** @description : set last source **>
+	method SetLastSourceReq{
+	    in{
+	        IntentInfoArray lastSourceSet
+	    }
+	}
+
+/* ****************************SM-API************************************* */
+<** @description : struct for SM **>
+    struct value_ampid{
+		String value
+		UInt32 ampid_req
+        String itemid_reply
+    }
+
+<** @description : MAP FOR SM **>
+	map key_value {
+		String to value_ampid
+	}
+
+<** @description : broadcast key_value_map FOR SM**>
+	broadcast key_value_map{
+		out {
+			key_value keyValue
+		}
+	}
+
+<** @description : method get_orgStateInfo FOR SM**>
+	method get_orgStateInfo  {
+		in {
+			UInt32 ampid
+		}
+		out {
+			key_value keyValue
+		}
+	}
+
+<** @description : method SM_SetReq fireAndForget FOR SM**>
+	method SM_SetReq fireAndForget  {
+		in {
+			UInt32 ampid_req
+			String key
+			String value
+		}
+	}
+
+<** @description : method SM_SetState fireAndForget FOR SM **>
+	method SM_SetState fireAndForget  {
+		in {
+			UInt32 ampid_req
+			String key
+			String value
+		}
+	}
+/* ****************************SM-API************************************* */
+
+/* ****************************IME-API************************************ */
+    <** @description : IME open IME-App **>
+    method openIME {
+        in {
+            UInt32 ampid
+            UInt32 keyboardType
+			UInt32 langType
+			String paramStr
+        }
+    }
+    <** @description : IME close IME-App **>
+    method closeIME {
+        in {
+            UInt32 ampid
+        }
+    }
+/* ****************************popup-API************************************* */
+<** @description : popup service send popup info **>
+	method sendPopupInfo {
+		in {
+			UInt32 ampid
+			UInt32 popupType
+			String popupInfo
+            UInt32 scrIdx
+		}
+		out {
+            UInt32 popupId
+    	}
+    }
+
+    method showPopup {
+		in {
+			UInt32 popupId
+		}
+		out {
+            Boolean popupRet
+    	}
+    }
+
+    method closePopup {
+		in {
+			UInt32 popupId
+		}
+		out {
+            Boolean popupRet
+    	}
+    }
+
+    broadcast notifyPopup{
+	    out{
+	       UInt32 popId
+		   UInt32 reason
+	    }
+	}
+
+    broadcast notifyPopupEx{
+	    out{
+	       UInt32 popId
+		   UInt32 reason
+		   String message
+	    }
+	}
+
+	method getPopupList {
+		out {
+			PopupInfo [] popupList
+		}
+	}
+	broadcast updatePopupList {
+		out {
+			PopupInfo [] popupList
+		}
+	}
+
+    method popupRespond {
+		in {
+			UInt32 popinfoId
+			UInt32 popRespondType
+		}
+	}
+
+	method popupRespondEx {
+		in {
+			UInt32 popinfoId
+			UInt32 popRespondType
+			String popRespondMessage
+		}
+	}
+
+	struct PopupInfo {
+		UInt32 id
+		UInt32 type
+		String message
+		UInt32 ampid
+        UInt32 index
+	}
+/* ****************************Audio-API************************************* */
+<** @description : AudioAPI requestAudioDeviceFocus **>
+	method requestAudioDeviceFocusReq fireAndForget {
+		in {
+			UInt32 connectID
+		}
+	}
+
+<** @description : AudioAPI releaseAudioDeviceFocus **>
+	method releaseAudioDeviceFocusReq fireAndForget {
+		in {
+			UInt32 connectID
+		}
+	}
+
+<** @description : AudioAPI setStreamMuteState **>
+	method setStreamMuteStateReq fireAndForget {
+		in {
+			UInt32 streamID
+            Boolean isMute
+		}
+	}
+
+<** @description : AudioAPI requestToUseSpeakerReq **>
+	method requestToUseSpeakerReq fireAndForget {
+		in {
+			UInt32 seatID
+		}
+	}
+
+<** @description : AudioAPI abandonToUseSpeakerReq **>
+	method abandonToUseSpeakerReq fireAndForget {
+		in {
+			UInt32 seatID
+		}
+	}
+
+<** @description : AudioAPI requestDuckAudio **>
+	method requestDuckAudio fireAndForget {
+		in {
+            UInt32 streamID
+            Boolean isDuck
+			UInt32 durationsms
+            UInt32 volume
+		}
+	}
+
+<** @description : SetAPI reqSetByAppManager **>
+	method setByAppManagerReq fireAndForget {
+		in {
+            UInt16 amPID
+			UInt32 key
+            UInt32 value
+		}
+	}
+
+<** @description : SetAPI reqSetByAppManager **>
+	method AMGRGetState {
+		in {
+            UInt16 amPID
+			UInt32 state_type
+		}
+		out {
+			String cur_state
+		}
+	}
+
+<** @description : AudioAPI reqLastMedia app for recover **>
+    method getLastMediaAppReq {
+		in {
+			UInt8 audioDevID
+		}
+		out {
+            UInt32 ampid
+    	}
+    }
+
+<** @description : check is volume type active **>
+	method isVolumeTypeActive{
+	    in{
+	        UInt32 volumeType
+	    }
+		out {
+            Boolean isActive
+		}
+	}
+/* ****************************Audio-API************************************* */
+
+/* ****************************App UI APIs begin***************************** */
+<** @description : title bar API. used to expand title bar's surface to maximum size **>
+	method ExpandTitlebarReq fireAndForget {
+		in {
+			UInt32 titlebarID
+		}
+	}
+
+<** @description : title bar API. used to shrink title bar's surface to minimum size **>
+	method ShrinkTitlebarReq fireAndForget {
+		in {
+			UInt32 titlebarID
+		}
+	}
+
+<** @description : title bar API. used to show/hide titlebar **>
+	method SetTitlebarVisibilityReq fireAndForget {
+		in {
+			UInt32 requesterID
+			Boolean isVisible
+			Int32 style
+		}
+	}
+
+<** @description : get titlebar's visibility **>
+	method GetTitlebarVisibilityReq{
+	    in{
+	        UInt32 requester
+	    }
+		out {
+            Boolean isVisible
+		}
+	}
+
+<** @description : request to drop down current titlebar **>
+	method DropDownTitlebarReq fireAndForget {
+	    in{
+	        UInt32 requester
+            Boolean isDropDown
+            UInt32 style
+	    }
+	}
+
+<** @description : to know is current titlebar is drop-down **>
+	method GetTitlebarDropDownStateReq{
+	    in{
+	        UInt32 requester
+	    }
+		out {
+            Boolean isDropDown
+		}
+	}
+/* ************************App UI APIs end*********************************** */
+
+/* ************************appClient-debug-API******************************* */
+<** @description : debug API. used to send debug command to appManager **>
+    method DebugReq fireAndForget {
+        in {
+            UInt32 debugCmd
+        }
+    }
+/* ************************appClient-debug-API******************************* */
+
+/* ************************app sync API start******************************** */
+<** @description : start sharing app to specified screen **>
+    method StartShareAppReq fireAndForget {
+        in {
+            UInt32 app
+            UInt32 seat
+            Boolean isMove
+        }
+    }
+
+<** @description : stop sharing specified app **>
+    method StopShareAppReq{
+        in {
+            UInt32 app
+            UInt32 seat
+        }
+    }
+
+<** @description : return the app that specified screen is showing **>
+    method GetCurrentShareReq{
+        in {
+            UInt32 seat
+        }
+        out {
+            UInt32 app
+        }
+    }
+
+<** @description : get source surfaces **>
+    method GetSourceSurfacesReq{
+        in {
+            UInt32 app
+        }
+        out {
+            U32Array sourceSurfaces
+        }
+    }
+
+<** @description : get working layers **>
+    method GetWorkingLayersReq{
+        in {
+            UInt32 app
+        }
+        out {
+            U32Array workingLayers
+            Boolean isMoving
+        }
+    }
+
+<** @description : set app alive true/false**>
+method KeepAppAlive fireAndForget  {
+    in {
+        UInt32 _ampid
+        Boolean _state
+    }
+}
+
+
+<** @description : set rear screen timer start/stop**>
+method SetRearTimerSTOP fireAndForget  {
+    in {
+        UInt32 _ampid
+        Boolean _state
+    }
+}
+
+
+<** @description : set screen on **>
+method SetScreenOnByApp fireAndForget  {
+    in {
+        UInt32 _seat
+    }
+}
+<** @description : set rear screen power off **>
+method SetRearPowerOff fireAndForget  {
+    in {
+        UInt32 _seat
+    }
+}
+
+method AppAwakeRequest fireAndForget  {
+    in {
+        UInt32 ampid
+        Boolean isAwake
+    }
+}
+method requestAlwaysOn fireAndForget  {
+    in {
+        UInt32 ampid
+        Boolean isAwaysOn
+    }
+}
+method SetBrightness fireAndForget  {
+    in {
+        UInt16 seatid
+        UInt16 brightness
+    }
+}
+method USBStateController fireAndForget  {
+    in {
+        UInt16 op
+    }
+}
+method getUSBDevState fireAndForget  {
+    in {
+		UInt32 _ampid
+    }
+}
+map TempMap{
+    Int32 to Int32
+}
+method RequestLcdTemperature {
+	out {
+            TempMap temperatureMap
+	}
+}
+/* ************************app sync API end********************************** */
+
+/* ************************debug interface start***************************** */
+<** @description : do a round trip **>
+    method None{
+    }
+/* ************************debug interface end******************************* */
+
+}

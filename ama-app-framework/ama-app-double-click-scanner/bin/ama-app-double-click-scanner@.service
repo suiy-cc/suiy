@@ -1,0 +1,17 @@
+[Unit]
+Description=NEUSOFT ama-app-double-click-scanner for %I
+Requires=weston.service ama-app-manager.service
+After=weston.service
+Before=unfocussed.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ama-app-double-click-scanner/ama-app-double-click-scanner %I
+LimitCORE=infinity
+Restart=always
+RestartSec=1
+Environment="XDG_RUNTIME_DIR=/tmp"
+Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/session_bus_socket"
+
+[Install]
+WantedBy=platform.target

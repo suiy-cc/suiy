@@ -1,0 +1,13 @@
+#  This file is part of easySQLite
+#
+
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include/easySQLite
+
+Name: easySQLite
+Description: easySQLite Library
+Version: 110
+Libs: -L${libdir} -leasySQLite
+Cflags: -I${includedir}

@@ -1,0 +1,13 @@
+#  This file is part of appISSDK.IS:InformingSound
+#
+
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include/appDB
+
+Name: appDB
+Description: appDB Library
+Version: 110
+Libs: -L${libdir} -lappDB
+Cflags: -I${includedir}

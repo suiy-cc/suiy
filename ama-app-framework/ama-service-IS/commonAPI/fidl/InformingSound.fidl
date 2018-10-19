@@ -1,0 +1,39 @@
+/* Copyright (C) 2016
+ * This Source Code Form is subject to the terms of the Hs7 Public */
+
+/* ********************************************************************* */
+package org.neusoft
+
+interface InformingSound
+{
+	version
+	{
+	    major 0
+	    minor 1
+	}
+/* ********************************************************************* */
+
+<** @description : ISAPI requestInformingSound **>
+	method reqToPlayInformingSound fireAndForget {
+		in {
+			UInt32 connectID
+            Boolean isPlay
+		}
+	}
+
+<** @description : ISAPI requestPlayRadarSound **>
+	method reqToPlaytRadarSound fireAndForget {
+		in {
+			UInt8 soundType
+            UInt16 highestLevelChannel
+		}
+	}
+
+<** @description : ISAPI requestPlayFeedbackSound **>
+	method reqToPlayFeedbackSound fireAndForget {
+		in {
+			UInt32 volumeType
+            UInt32 volume
+		}
+	}
+}

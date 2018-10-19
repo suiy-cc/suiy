@@ -1,0 +1,95 @@
+{
+    "fastBootApps": [
+        {
+            "AMPID": "0xf10a",
+            "itemID": "com.hs7.syssetting.service",
+            "path": "",
+            "label": "",
+            "bigIcon": "",
+            "smallIcon": "",
+            "systemdFile": "com.hs7.setting-service@.service",
+            "itemType": "PRIVATESERVICE",
+            "isAutoStart": true,
+            "isThereLoadingScreen": false,
+            "target": ""
+        },
+        {
+            "AMPID": "0x1001",
+            "itemID": "com.hs7.home.scr1",
+            "path": "",
+            "label": "",
+            "bigIcon": "",
+            "smallIcon": "",
+            "systemdFile": "com.hs7.home@.service",
+            "itemType": "SYSTEMAPP",
+            "isAutoStart": true,
+            "isThereLoadingScreen": false,
+            "target": ""
+        },
+        {
+            "AMPID": "0x2001",
+            "itemID": "com.hs7.home.scr2",
+            "path": "",
+            "label": "",
+            "bigIcon": "",
+            "smallIcon": "",
+            "systemdFile": "com.hs7.home@.service",
+            "itemType": "SYSTEMAPP",
+            "isAutoStart": true,
+            "isThereLoadingScreen": false,
+            "target": ""
+        },
+        {
+            "AMPID": "0x3001",
+            "itemID": "com.hs7.home.scr3",
+            "path": "",
+            "label": "",
+            "bigIcon": "",
+            "smallIcon": "",
+            "systemdFile": "com.hs7.home@.service",
+            "itemType": "SYSTEMAPP",
+            "isAutoStart": true,
+            "isThereLoadingScreen": false,
+            "target": ""
+        },
+        {
+            "AMPID": "0x1007",
+            "itemID": "com.hs7.radio.scr1",
+            "path": "",
+            "label": "",
+            "bigIcon": "/opt/system/apps/com.hs7.radio/shared-res/Main_icon_radio.png",
+            "smallIcon": "/opt/system/apps/com.hs7.radio/shared-res/Main_shorticon_radio.png",
+            "systemdFile": "com.hs7.radio@.service",
+            "itemType": "COMMONAPP",
+            "isAutoStart": false,
+            "isThereLoadingScreen": false,
+            "target": "/opt/system/apps/com.hs7.radio/bin/radio"
+        },
+        {
+            "AMPID": "0xf107",
+            "itemID": "com.hs7.radio.service",
+            "path": "",
+            "label": "",
+            "bigIcon": "",
+            "smallIcon": "",
+            "systemdFile": "com.hs7.radio-service@.service",
+            "itemType": "PRIVATESERVICE",
+            "isAutoStart": false,
+            "isThereLoadingScreen": false,
+            "target": "radio-service"
+        },
+        {
+            "AMPID": "0xf125",
+            "itemID": "com.hs7.media-sm-svr.service",
+            "path": "",
+            "label": "",
+            "bigIcon": "",
+            "smallIcon": "",
+            "systemdFile": "com.hs7.media-sm-svr@.service",
+            "itemType": "PUBLICSERVICE",
+            "isAutoStart": true,
+            "isThereLoadingScreen": false,
+            "target": "/opt/system/apps/com.hs7.media/bin/media-smsvr"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+WHAT IT IS
+----------
+
+
+HOW TO COMPILE IT
+----------
+1. mkdir build
+2. cd build
+3. cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+4. make
+
+
+HOW TO INSTALL IT
+----------
+   make DESTDIR=${SDKTARGETSYSROOT} install

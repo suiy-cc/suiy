@@ -1,0 +1,17 @@
+[Unit]
+Description=NEUSOFT InformingSound service for play softkey Sound etc.
+Wants=ama-app-manager.service
+After=ama-app-manager.service
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/ama-service-IS
+WatchdogSec=20
+Restart=on-failure
+Environment="XDG_RUNTIME_DIR=/tmp"
+Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/session_bus_socket"
+LimitCORE=infinity
+RestartPreventExitStatus=SIGKILL
+
+[Install]
+WantedBy=focussed.target

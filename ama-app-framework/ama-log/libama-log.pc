@@ -1,0 +1,13 @@
+#  This lib is part of appSDK.
+#
+
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include/appSDK
+
+Name: ama-log
+Description: appSDK's log Library
+Version: 110
+Libs: -L${libdir} -lama-log
+Cflags: -I${includedir}
