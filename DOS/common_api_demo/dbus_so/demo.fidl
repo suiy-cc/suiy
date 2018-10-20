@@ -1,0 +1,62 @@
+/* Copyright (C) 2015 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+/* ********************************* */
+/* namespace v88_99 {                */
+/* namespace APP_NAME {              */
+/* class HelloWorldStubDefault       */
+/* ********************************* */
+
+/* ********************************************************************* */
+/* 独占一行 APP_NAME根据实际情况定制，不允许*.*格式 */
+package APP_NAME
+
+/* 独占一行 HelloWorld根据实际情况定制 */
+interface HelloWorld
+{
+  /* 版本信息必须有 */
+	version
+	{
+	    /* 独占一行 根据实际情况定制 */
+	    major 0
+	    /* 独占一行 根据实际情况定制 */
+	    minor 1
+	}
+/* ********************************************************************* */
+
+<** @description : 这是一个标准的函数接口，拥有一个输入参数，一个输出参数 **>
+	method sayHello {
+		in {
+			String name
+		}
+		out {
+			String message
+		}
+	}
+	
+<** @description : fireAndForget的函数，只有一个输入参数  note tell为函数名 **>
+	method tell fireAndForget {
+		in {
+			String name
+		}
+	}
+
+<** @description : selective的广播，只有一个输出参数。注意，这里的输出是针对服务端来说的，也就是说，从服务端输出到客户端。从通常意义来讲，这是个输入参数。下同 **>
+	broadcast reply selective{
+		out {
+			String name
+		}
+	}
+
+<** @description : 一个标准的广播接口，带有一个参数 **>
+    broadcast yell {
+		out {
+			String name
+		}
+	}
+	
+<** @description : 定义一个私有成员变量和一组对应的Get（客户端）/ Set（服务端）函数**>
+	attribute Int32 x
+}
