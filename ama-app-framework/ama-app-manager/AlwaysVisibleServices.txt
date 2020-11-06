@@ -1,7 +1,0 @@
-com.hs7.titlebar.scr1
-com.hs7.titlebar.scr2
-com.hs7.titlebar.scr3
-
-com.hs7.background.scr1
-com.hs7.background.scr2
-com.hs7.background.scr3
